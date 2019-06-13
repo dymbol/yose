@@ -1,0 +1,16 @@
+OutputDir="/home/test/tmp/yose_output"
+Websites=[
+
+    {
+        "name": "Autotaglibro development",
+        "url": "http://127.0.0.1:8000/TestConnection",
+        "test_method": "json",
+        "status": "database connection ok"
+    },
+    {
+        "name": "wp.pl",
+        "url": "https://www.wp.pl",
+        "test_method": "http_code",
+        "result": "200"
+    }
+]

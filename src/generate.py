@@ -1,13 +1,19 @@
-from jinja2 import Environment, Template, PackageLoader, select_autoescape
+from jinja2 import Environment, Template, FileSystemLoader
+import harvest
+import settings
+
+#get data
+web_anal = harvest.web()
+#backup_anal = harvest.backup()
+#services_anal = harvest.services()
+
 env = Environment(
-    loader=PackageLoader('templates'),
-    autoescape=select_autoescape(['html', 'xml'])
+    loader=FileSystemLoader("templates")
 )
-websites = []
 
+template = env.get_template('index.html')
+output = template.render(web_anal=web_anal)
 
-template = env.get_template('mytemplate.html')
-
-websites.append({href: "http:wp.pl", status: "0"})
-template.render(websites=websites)
-print(template)
+file = open("{0}/index.html".format(settings.OutputDir),"w")
+file.write(output)
+file.close()

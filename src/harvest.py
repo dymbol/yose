@@ -3,10 +3,11 @@ import settings
 import json
 import urllib.request
 import ssl
+import datetime
 
 def web():
     '''
-    test web pages basen on Websites list from settings
+    test web pages stored in Websites list from settings.py
     '''
     websites_results = []
     for website in settings.Websites:
@@ -42,7 +43,8 @@ def web():
             "name": website["name"],
             "url": website["url"],
             "status": status,
-            "status_code": status_code
-        }
+            "status_code": status_code,
+            "harvest_date": datetime.datetime.now()
+            }
         websites_results.append(website_results)
     return websites_results
