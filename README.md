@@ -12,6 +12,8 @@ Used technolgies:
   - jinja2
   - bootstrap  
 
-Current look: ![alt text](https://dymbol.github.io/yose.png)
+Current look:
+
+![alt text](https://dymbol.github.io/yose.png)
 
 Visual concept is based on: https://demo.cachethq.io/
