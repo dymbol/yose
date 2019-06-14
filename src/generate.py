@@ -1,14 +1,16 @@
 from jinja2 import Environment, Template, FileSystemLoader
 import harvest
 import settings
+import os, sys
 
+workdir = os.path.dirname(os.path.realpath(sys.argv[0]))
 #get data
 web_anal = harvest.web()
 #backup_anal = harvest.backup()
 #services_anal = harvest.services()
 
 env = Environment(
-    loader=FileSystemLoader("templates")
+    loader=FileSystemLoader("{0}/templates".format(workdir))
 )
 
 template = env.get_template('index.html')
