@@ -14,3 +14,12 @@ Websites=[
         "result": "200"
     }
 ]
+
+Backups = [
+    {
+        "name": "restic b2 backup",
+        "test_method": "json_restic",
+        "file_path": "/home/me/tmp/backup_restic_r2.json",
+        "period": 2   #type int, please provide days
+    }
+]

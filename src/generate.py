@@ -2,11 +2,12 @@ from jinja2 import Environment, Template, FileSystemLoader
 import harvest
 import settings
 import os, sys
+from datetime import datetime
 
 workdir = os.path.dirname(os.path.realpath(sys.argv[0]))
 #get data
 web_anal = harvest.web()
-#backup_anal = harvest.backup()
+backup_anal = harvest.backup()
 #services_anal = harvest.services()
 
 env = Environment(
@@ -14,7 +15,7 @@ env = Environment(
 )
 
 template = env.get_template('index.html')
-output = template.render(web_anal=web_anal)
+output = template.render(web_anal=web_anal, backup_anal=backup_anal, gen_date=datetime.now())
 
 file = open("{0}/index.html".format(settings.OutputDir),"w")
 file.write(output)
