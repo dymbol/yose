@@ -84,7 +84,7 @@ def backup():
                 status_code = 1
 
 
-        if backup_definition["test_method"] == "json_hydra_v1":
+        elif backup_definition["test_method"] == "json_hydra_v1":
             '''
                 This method checks the last backup's date and status from Hydra_backup json log file.
                 If the date is older than backup["period"] or ststus is greater than 0 it returns problem with backup.
