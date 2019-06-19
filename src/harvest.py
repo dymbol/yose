@@ -100,7 +100,7 @@ def backup():
                                 status = "Backup too old ({0} days)".format(backup['period'])
                                 status_code = 2
                             else:
-                                if bck_item['status'] > 0 #checking for bash exit code from backup
+                                if bck_item['status'] > 0: #checking for bash exit code from backup
                                     status = "There were errors while creating backup"
                                     status_code = 3
                                 else:
@@ -121,19 +121,19 @@ def backup():
                         raise
 
                 except:
-                    status = "Can't open file {0}".format(backup['file_path'])
+                    status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     raise
             else:
-                status = "Can't open file {0}".format(backup['file_path'])
+                status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
         else:
-            status = "Unknown test method: {0}".format(backup["test_method"])
+            status = "Unknown test method: {0}".format(backup_definition["test_method"])
             status_code = 99
 
     backup_results = {
-        "name": backup["name"],
-        "file_path": backup["file_path"],
+        "name": backup_definition["name"],
+        "file_path": backup_definition["file_path"],
         "status": status,
         "status_code": status_code,
         "harvest_date": datetime.datetime.now()
