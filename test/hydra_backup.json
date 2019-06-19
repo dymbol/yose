@@ -1,0 +1,12 @@
+[
+      {"format": "json_hydra_v1"},
+      [
+        { "name": "Database backup",
+          "status": "$DB_BACKUP_STATUS",
+          "time": "$DB_BACKUP_TIME"
+        },
+        { "name": "Local drive backup",
+          "status": "$LOCAL_DRIVE_BACKUP_STATUS",
+          "time": "$LOCAL_DRIVE_BACKUP_TIME"}
+      ]
+    ]

@@ -20,6 +20,12 @@ Backups = [
         "name": "restic b2 backup",
         "test_method": "json_restic",
         "file_path": "/home/me/tmp/backup_restic_r2.json",
+        "period": 2   #if older than %period% then malfunction. type int, please provide days
+    },
+    {
+        "name": "Hydra backup",
+        "test_method": "json_hydra_v1",
+        "file_path": "/home/me/tmp/backup_.json",
         "period": 2   #type int, please provide days
     }
 ]
