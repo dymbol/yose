@@ -82,7 +82,14 @@ def backup():
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
-
+            backup_results = {
+                "name": backup_definition["name"],
+                "file_path": backup_definition["file_path"],
+                "status": status,
+                "status_code": status_code,
+                "harvest_date": datetime.datetime.now()
+                }
+            results.append(backup_results)    
 
         elif backup_definition["test_method"] == "json_hydra_v1":
             '''
