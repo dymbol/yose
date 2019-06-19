@@ -78,7 +78,6 @@ def backup():
                 except:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
-                    raise
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
@@ -112,7 +111,6 @@ def backup():
                 except:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
-                    raise
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
