@@ -25,12 +25,18 @@ def web():
             except urllib.error.HTTPError:
                 status = "Can't connect"
                 status_code = 2
+                if settings.Verbose is True:
+                    raise
             except urllib.error.URLError:
                 status = "Can't connect"
                 status_code = 3
+                if settings.Verbose is True:
+                    raise
             except ssl.CertificateError:
                 status = "Certificate Error"
                 status_code = 4
+                if settings.Verbose is True:
+                    raise
 
         elif website["test_method"] == "http_code":
     	    try:
@@ -44,6 +50,8 @@ def web():
             except urllib.error.HTTPError:
                 status = "Can't connect"
                 status_code = 2
+                if settings.Verbose is True:
+                    raise
 
         else:
             status = "Unknown test method: {0}".format(website["test_method"])
@@ -87,6 +95,8 @@ def backup():
                 except:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
+                    if settings.Verbose is True:
+                        raise
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
@@ -116,10 +126,13 @@ def backup():
                     else:
                         status = "Unknown backup log file format {0}".format(json_output['format'])
                         status_code = 1
-                        raise
+                        if settings.Verbose is True:
+                            raise
                 except:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
+                    if settings.Verbose is True:
+                        raise 
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
