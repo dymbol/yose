@@ -39,8 +39,8 @@ def web():
                     raise
 
         elif website["test_method"] == "http_code":
-    	    try:
-    	        response_code = urllib.request.urlopen(website["url"]).getcode()
+            try:
+                response_code = urllib.request.urlopen(website["url"]).getcode()
                 if response_code == 200:
                     status = "Connection successfull"
                     status_code = 0
