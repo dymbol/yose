@@ -31,11 +31,20 @@ def web():
             except ssl.CertificateError:
                 status = "Certificate Error"
                 status_code = 4
+
         elif website["test_method"] == "http_code":
-            response_code = urllib.request.urlopen(website["url"]).getcode()
-            if response_code == 200:
-                status = "Connection successfull"
-                status_code = 0
+    	    try:
+    	        response_code = urllib.request.urlopen(website["url"]).getcode()
+        		if response_code == 200:
+                    status = "Connection successfull"
+                    status_code = 0
+                else:
+                    status = "Connection issue. HTTP status: {0}".format(response_code)
+                    status_code = 3
+            except urllib.error.HTTPError:
+                status = "Can't connect"
+                status_code = 2
+
         else:
             status = "Unknown test method: {0}".format(website["test_method"])
             status_code = 99
