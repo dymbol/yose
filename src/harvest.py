@@ -26,17 +26,23 @@ def web():
                 status = "Can't connect"
                 status_code = 2
                 if settings.Verbose is True:
+                    print(status)
                     print(e)
+                    print("=====================")
             except urllib.error.URLError as e:
                 status = "Can't connect"
                 status_code = 3
                 if settings.Verbose is True:
+                    print(status)
                     print(e)
+                    print("=====================")
             except ssl.CertificateError as e:
                 status = "Certificate Error"
                 status_code = 4
                 if settings.Verbose is True:
+                    print(status)
                     print(e)
+                    print("=====================")
 
         elif website["test_method"] == "http_code":
             try:
@@ -51,7 +57,9 @@ def web():
                 status = "Can't connect"
                 status_code = 2
                 if settings.Verbose is True:
+                    print(status)
                     print(e)
+                    print("=====================")
 
         else:
             status = "Unknown test method: {0}".format(website["test_method"])
@@ -96,7 +104,9 @@ def backup():
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
+                        print(status)
                         print(e)
+                        print("=====================")
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
@@ -132,7 +142,9 @@ def backup():
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
+                        print(status)
                         print(e)
+                        print("=====================")
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
