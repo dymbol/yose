@@ -87,7 +87,7 @@ def backup():
         if backup_definition["test_method"] == "json_restic":
             '''
                 This method checks the last backup's date from restic's back log.
-                If the date is older than backup["period"] it returns problem with backup
+                If the date is older than backup_definition["period"] it returns problem with backup
             '''
             if os.path.isfile(backup_definition['file_path']):
                 try:
@@ -95,7 +95,7 @@ def backup():
                     restic_output = json.loads(file_jl.read())
                     last_backup_date = datetime.datetime.strptime(restic_output[-1]['time'][:-9], '%Y-%m-%dT%H:%M:%S.%f') #2019-06-17T12:34:33.110604005+02:00
                     if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
-                        status = "Backup too old ({0} days)".format(backup['period'])
+                        status = "Backup too old ({0} days)".format(backup_definition['period'])
                         status_code = 2
                     else:
                         status = "Backup created: {0}".format(last_backup_date)
@@ -115,7 +115,7 @@ def backup():
         elif backup_definition["test_method"] == "json_hydra_v1":
             '''
                 This method checks the last backup's date and status from Hydra_backup json log file.
-                If the date is older than backup["period"] or ststus is greater than 0 it returns problem with backup.
+                If the date is older than backup_definition["period"] or ststus is greater than 0 it returns problem with backup.
             '''
             if os.path.isfile(backup_definition['file_path']):
                 try:
@@ -124,7 +124,7 @@ def backup():
                     if bck_item[0]['format'] == "json_hydra_v1":
                         last_backup_date = datetime.datetime.strptime(bck_item[0]['time'], '%Y-%m-%dT%H:%M:%S.%f') #isoformat
                         if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
-                            status = "Backup too old ({0} days)".format(backup['period'])
+                            status = "Backup too old ({0} days)".format(backup_definition['period'])
                             status_code = 2
                         else:
                             if bck_item[0]['status'] > 0: #checking for bash exit code from backup
