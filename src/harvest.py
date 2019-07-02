@@ -41,7 +41,7 @@ def web():
         elif website["test_method"] == "http_code":
     	    try:
     	        response_code = urllib.request.urlopen(website["url"]).getcode()
-        		if response_code == 200:
+                if response_code == 200:
                     status = "Connection successfull"
                     status_code = 0
                 else:
@@ -132,7 +132,7 @@ def backup():
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
-                        raise 
+                        raise
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
