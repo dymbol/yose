@@ -22,21 +22,21 @@ def web():
                     status_code = 0
                 else:
                     status_code = 1
-            except urllib.error.HTTPError:
+            except urllib.error.HTTPError as e:
                 status = "Can't connect"
                 status_code = 2
                 if settings.Verbose is True:
-                    raise
-            except urllib.error.URLError:
+                    print(e)
+            except urllib.error.URLError as e:
                 status = "Can't connect"
                 status_code = 3
                 if settings.Verbose is True:
-                    raise
-            except ssl.CertificateError:
+                    print(e)
+            except ssl.CertificateError as e:
                 status = "Certificate Error"
                 status_code = 4
                 if settings.Verbose is True:
-                    raise
+                    print(e)
 
         elif website["test_method"] == "http_code":
             try:
@@ -47,11 +47,11 @@ def web():
                 else:
                     status = "Connection issue. HTTP status: {0}".format(response_code)
                     status_code = 3
-            except urllib.error.HTTPError:
+            except urllib.error.HTTPError as e:
                 status = "Can't connect"
                 status_code = 2
                 if settings.Verbose is True:
-                    raise
+                    print(e)
 
         else:
             status = "Unknown test method: {0}".format(website["test_method"])
@@ -92,11 +92,11 @@ def backup():
                     else:
                         status = "Backup created: {0}".format(last_backup_date)
                         status_code = 0
-                except:
+                except as e:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
-                        raise
+                        print(e)
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
@@ -128,11 +128,11 @@ def backup():
                         status_code = 1
                         if settings.Verbose is True:
                             raise
-                except:
+                except as e:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
-                        raise
+                        print(e)
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
