@@ -92,7 +92,7 @@ def backup():
                     else:
                         status = "Backup created: {0}".format(last_backup_date)
                         status_code = 0
-                except as e:
+                except Exception as e:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
@@ -128,7 +128,7 @@ def backup():
                         status_code = 1
                         if settings.Verbose is True:
                             raise
-                except as e:
+                except Exception as e:
                     status = "Can't open file {0}".format(backup_definition['file_path'])
                     status_code = 1
                     if settings.Verbose is True:
