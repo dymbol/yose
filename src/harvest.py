@@ -91,8 +91,8 @@ def backup():
             '''
             if os.path.isfile(backup_definition['file_path']):
                 try:
-                    file = open(backup_definition['file_path'],"r")
-                    restic_output = json.loads(file.read())
+                    file_jl = open(backup_definition['file_path'],"r")
+                    restic_output = json.loads(file_jl.read())
                     last_backup_date = datetime.datetime.strptime(restic_output[-1]['time'][:-9], '%Y-%m-%dT%H:%M:%S.%f') #2019-06-17T12:34:33.110604005+02:00
                     if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
                         status = "Backup too old ({0} days)".format(backup['period'])
@@ -119,8 +119,8 @@ def backup():
             '''
             if os.path.isfile(backup_definition['file_path']):
                 try:
-                    file = open(backup_definition['file_path'],"r")
-                    bck_item = json.loads(file.read())
+                    file_jl = open(backup_definition['file_path'],"r")
+                    bck_item = json.loads(file_jl.read())
                     if bck_item[0]['format'] == "json_hydra_v1":
                         last_backup_date = datetime.datetime.strptime(bck_item[0]['time'], '%Y-%m-%dT%H:%M:%S.%f') #isoformat
                         if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
