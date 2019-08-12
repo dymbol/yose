@@ -30,3 +30,11 @@ Backups = [
         "period": 2   #type int, please provide days
     }
 ]
+Services = [
+    {
+        "name": "My vpn",
+        "test_method": "command",
+        "command": "echo vpn_works",
+        "result_stdout": "vpn_works"
+    }
+]

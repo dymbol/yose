@@ -8,14 +8,14 @@ workdir = os.path.dirname(os.path.realpath(sys.argv[0]))
 #get data
 web_anal = harvest.web()
 backup_anal = harvest.backup()
-#services_anal = harvest.services()
+service_anal = harvest.services()
 
 env = Environment(
     loader=FileSystemLoader("{0}/templates".format(workdir))
 )
 
 template = env.get_template('index.html')
-output = template.render(web_anal=web_anal, backup_anal=backup_anal, gen_date=datetime.now())
+output = template.render(web_anal=web_anal, backup_anal=backup_anal, service_anal=service_anal, gen_date=datetime.now())
 
 file = open("{0}/index.html".format(settings.OutputDir),"w")
 file.write(output)

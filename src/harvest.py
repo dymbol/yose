@@ -5,6 +5,7 @@ import urllib.request
 import ssl
 import datetime
 import os
+import subprocess
 
 def web():
     '''
@@ -161,4 +162,32 @@ def backup():
             }
         results.append(backup_results)
 
+    return results
+def services():
+    '''
+    test services statuses stored in Services list from settings.py
+    '''
+    results = []
+    for service_definition in settings.Services:
+        status = ""
+        status_code = 1
+        if service_definition["test_method"] == "command":
+            result = subprocess.Popen(service_definition['command'], shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
+            if result == service_definition["result_stdout"]:
+                status = f"Service {service_definition['name']} works"
+                status_code = 0
+            else:
+                status = f"Service {service_definition['name']} wrong result: {result}"
+                status_code = 1
+        else:
+            status = f"Unknown test method: {service_definition['test_method']}"
+            status_code = 99
+        service_results = {
+            "name": service_definition["name"],
+            "command": service_definition["command"],
+            "status": status,
+            "status_code": status_code,
+            "harvest_date": datetime.datetime.now()
+            }
+        results.append(service_results)
     return results
