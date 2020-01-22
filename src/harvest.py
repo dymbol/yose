@@ -44,6 +44,13 @@ def web():
                     print(status)
                     print(e)
                     print("=====================")
+            except socket.gaierror:
+                status = "DNS error"
+                status_code = 4
+                if settings.Verbose is True:
+                    print(status)
+                    print(e)
+                    print("=====================")
 
         elif website["test_method"] == "http_code":
             try:
