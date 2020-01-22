@@ -15,45 +15,16 @@ def web():
     for website in settings.Websites:
         status = ""
         status_code = 1
-        if website["test_method"] == "json":
-            try:
+
+        try:
+            if website["test_method"] == "json":
                 f = urllib.request.urlopen(website["url"])
                 status = json.loads(f.read(100))["status"]
                 if status == "database connection ok":
                     status_code = 0
                 else:
                     status_code = 1
-            except urllib.error.HTTPError as e:
-                status = "Can't connect"
-                status_code = 2
-                if settings.Verbose is True:
-                    print(status)
-                    print(e)
-                    print("=====================")
-            except urllib.error.URLError as e:
-                status = "Can't connect"
-                status_code = 3
-                if settings.Verbose is True:
-                    print(status)
-                    print(e)
-                    print("=====================")
-            except ssl.CertificateError as e:
-                status = "Certificate Error"
-                status_code = 4
-                if settings.Verbose is True:
-                    print(status)
-                    print(e)
-                    print("=====================")
-            except socket.gaierror:
-                status = "DNS error"
-                status_code = 4
-                if settings.Verbose is True:
-                    print(status)
-                    print(e)
-                    print("=====================")
-
-        elif website["test_method"] == "http_code":
-            try:
+            elif website["test_method"] == "http_code":
                 response_code = urllib.request.urlopen(website["url"]).getcode()
                 if response_code == 200:
                     status = "Connection successfull"
@@ -61,17 +32,37 @@ def web():
                 else:
                     status = "Connection issue. HTTP status: {0}".format(response_code)
                     status_code = 3
-            except urllib.error.HTTPError as e:
-                status = "Can't connect"
-                status_code = 2
-                if settings.Verbose is True:
-                    print(status)
-                    print(e)
-                    print("=====================")
-
-        else:
-            status = "Unknown test method: {0}".format(website["test_method"])
-            status_code = 99
+            else:
+                status = "Unknown test method: {0}".format(website["test_method"])
+                status_code = 99
+        except urllib.error.HTTPError as e:
+            status = "Can't connect"
+            status_code = 2
+            if settings.Verbose is True:
+                print(status)
+                print(e)
+                print("=====================")
+        except urllib.error.URLError as e:
+            status = "Can't connect"
+            status_code = 3
+            if settings.Verbose is True:
+                print(status)
+                print(e)
+                print("=====================")
+        except ssl.CertificateError as e:
+            status = "Certificate Error"
+            status_code = 4
+            if settings.Verbose is True:
+                print(status)
+                print(e)
+                print("=====================")
+        except socket.gaierror:
+            status = "DNS error"
+            status_code = 4
+            if settings.Verbose is True:
+                print(status)
+                print(e)
+                print("=====================")
 
         website_results = {
             "name": website["name"],
