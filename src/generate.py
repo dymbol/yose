@@ -15,7 +15,7 @@ env = Environment(
 )
 
 template = env.get_template('index.html')
-output = template.render(web_anal=web_anal, backup_anal=backup_anal, service_anal=service_anal, gen_date=datetime.now())
+output = template.render(web_anal=web_anal, backup_anal=backup_anal, service_anal=service_anal, gen_date=datetime.now(), title=settings.TITLE)
 
 file = open("{0}/index.html".format(settings.OutputDir),"w")
 file.write(output)
