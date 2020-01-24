@@ -1,6 +1,7 @@
 OutputDir="/home/test/tmp/yose_output"
 Title="My beautiful monitoring"
 Verbose=True
+meta_restart_page_s=60
 Websites=[
 
     {
