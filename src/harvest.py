@@ -147,6 +147,33 @@ def backup():
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
+        if backup_definition["test_method"] == "json_borg":
+            '''
+                This method checks the last backup's date from borg's output from "borg info --json" command.
+                If the date is older than backup_definition["period"] it returns problem with backup
+            '''
+            if os.path.isfile(backup_definition['file_path']):
+                try:
+                    file_jl = open(backup_definition['file_path'],"r")
+                    borg_output = json.loads(file_jl.read())
+                    last_backup_date = datetime.datetime.strptime(borg_output["repository"]["last_modified"][:-9], '%Y-%m-%dT%H:%M:%S.%f') #2019-06-17T12:34:33.110604005+02:00
+                    if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
+                        status = "Backup too old ({0} days)".format(backup_definition['period'])
+                        status_code = 2
+                    else:
+                        status = "Backup created: {0}".format(last_backup_date)
+                        status_code = 0
+                except Exception as e:
+                    status = "Can't open file {0}".format(backup_definition['file_path'])
+                    status_code = 1
+                    if settings.Verbose is True:
+                        print(status)
+                        print(e)
+                        print("=====================")
+            else:
+                status = "Can't open file {0}".format(backup_definition['file_path'])
+                status_code = 1                
+        
         else:
             status = "Unknown test method: {0}".format(backup_definition["test_method"])
             status_code = 99
@@ -160,7 +187,7 @@ def backup():
             }
         if "zabbix_key" in backup_definition:
             backup_results["zabbix_key"] = backup_definition["zabbix_key"] 
-            
+
         results.append(backup_results)
 
     return results
