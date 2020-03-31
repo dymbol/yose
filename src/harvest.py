@@ -156,7 +156,7 @@ def backup():
                 try:
                     file_jl = open(backup_definition['file_path'],"r")
                     borg_output = json.loads(file_jl.read())
-                    last_backup_date = datetime.datetime.strptime(borg_output["repository"]["last_modified"][:-9], '%Y-%m-%dT%H:%M:%S.%f') #2019-06-17T12:34:33.110604005+02:00
+                    last_backup_date = datetime.datetime.strptime(borg_output["repository"]["last_modified"], '%Y-%m-%dT%H:%M:%S.%f') #2020-03-31T10:27:18.000000
                     if (datetime.datetime.now() - last_backup_date) > datetime.timedelta(days=backup_definition['period']):
                         status = "Backup too old ({0} days)".format(backup_definition['period'])
                         status_code = 2
