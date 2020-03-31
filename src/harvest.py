@@ -147,7 +147,7 @@ def backup():
             else:
                 status = "Can't open file {0}".format(backup_definition['file_path'])
                 status_code = 1
-        if backup_definition["test_method"] == "json_borg":
+        elif backup_definition["test_method"] == "json_borg":
             '''
                 This method checks the last backup's date from borg's output from "borg info --json" command.
                 If the date is older than backup_definition["period"] it returns problem with backup
