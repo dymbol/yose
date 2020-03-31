@@ -3,6 +3,7 @@ import harvest
 import settings
 import os, sys
 from datetime import datetime
+from pyzabbix import ZabbixMetric, ZabbixSender
 
 workdir = os.path.dirname(os.path.realpath(sys.argv[0]))
 #get data
@@ -20,3 +21,13 @@ output = template.render(web_anal=web_anal, backup_anal=backup_anal, service_ana
 file = open("{0}/index.html".format(settings.OutputDir),"w")
 file.write(output)
 file.close()
+
+
+# sending zabbix statuses
+metrics = []
+for bck in backup_anal:
+    if "zabbix_key" in bck.keys():
+        m = ZabbixMetric(settings.zabbix_monitored_host, bck["zabbix_key"], bck["status_code"])
+        metrics.append(m)
+zbx = ZabbixSender(settings.zabbix_srv)
+zbx.send(metrics)        

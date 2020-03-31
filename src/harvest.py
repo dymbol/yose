@@ -158,6 +158,9 @@ def backup():
             "status_code": status_code,
             "harvest_date": datetime.datetime.now()
             }
+        if "zabbix_key" in backup_definition:
+            backup_results["zabbix_key"] = backup_definition["zabbix_key"] 
+            
         results.append(backup_results)
 
     return results

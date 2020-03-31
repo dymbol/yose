@@ -2,6 +2,9 @@ OutputDir="/home/test/tmp/yose_output"
 Title="My beautiful monitoring"
 Verbose=True
 meta_restart_page_s=60
+zabbix_srv="mon0.local.gda"
+zabbix_monitored_host="tool0.local.gda"
+
 Websites=[
 
     {
