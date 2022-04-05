@@ -24,10 +24,11 @@ file.close()
 
 
 # sending zabbix statuses
-metrics = []
-for bck in backup_anal:
-    if "zabbix_key" in bck.keys():
-        m = ZabbixMetric(settings.zabbix_monitored_host, bck["zabbix_key"], bck["status_code"])
-        metrics.append(m)
-zbx = ZabbixSender(settings.zabbix_srv)
-zbx.send(metrics)        
+if settings.generate_zabbix_metrics is True:
+    metrics = []
+    for bck in backup_anal:
+        if "zabbix_key" in bck.keys():
+            m = ZabbixMetric(settings.zabbix_monitored_host, bck["zabbix_key"], bck["status_code"])
+            metrics.append(m)
+    zbx = ZabbixSender(settings.zabbix_srv)
+    zbx.send(metrics)        
