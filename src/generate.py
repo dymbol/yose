@@ -24,7 +24,7 @@ file.close()
 
 
 if settings.generate_prometheus_metrics:
-    template = env.get_template('metrics')
+    template = env.get_template('metrics.prom')
     output = template.render(web_anal=web_anal, backup_anal=backup_anal, service_anal=service_anal, gen_date=datetime.now(),)
 
     pro_metr = open("{0}/metrics".format(settings.OutputDir),"w")
