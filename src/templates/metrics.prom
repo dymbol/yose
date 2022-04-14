@@ -1,9 +1,9 @@
-{% for element in web_anal %}
-  web_status{service="{{element["name"]}}"} {{element["status_code"]}}
+{% for element in web_anal -%}
+web_status{service="{{element["name"]}}"} {{element["status_code"]}}
 {% endfor %}
-{% for element in backup_anal %}
-  backup_status{backup="{{element["name"]}}", status="{{element["status"]}}"} {{element["status_code"]}}
+{% for element in backup_anal -%}
+backup_status{backup="{{element["name"]}}", status="{{element["status"]}}"} {{element["status_code"]}}
 {% endfor %}
-{% for element in service_anal %}
-  service_status{service="{{element["name"]}}"} {{element["status_code"]}}
+{% for element in service_anal -%}
+service_status{service="{{element["name"]}}"} {{element["status_code"]}}
 {% endfor %}
