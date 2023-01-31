@@ -1,9 +1,10 @@
-OutputDir="/home/test/tmp/yose_output"
-Title="My beautiful monitoring"
+OutputDir="/tmp/yose_output"
+TITLE="My beautiful monitoring"
 Verbose=True
 meta_restart_page_s=60
 zabbix_srv="mon0.local.gda"
 zabbix_monitored_host="tool0.local.gda"
+generate_prometheus_metrics=True
 
 Websites=[
 
@@ -25,13 +26,13 @@ Backups = [
     {
         "name": "restic b2 backup",
         "test_method": "json_restic",
-        "file_path": "/home/me/tmp/backup_restic_r2.json",
+        "file_path": "../test/backup_restic_r2.json",
         "period": 2   #if older than %period% then malfunction. type int, please provide days
     },
     {
         "name": "Hydra backup",
         "test_method": "json_hydra_v1",
-        "file_path": "/home/me/tmp/backup_.json",
+        "file_path": "../test/hydra_backup.json",
         "period": 2   #type int, please provide days
     }
 ]
