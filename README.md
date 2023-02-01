@@ -7,10 +7,17 @@ Simple status page of:
   - websites
   - backup
 
+External tools:
+  - generates Prometheus metrics
+  - notifies Zabbix
+
 Used technolgies:
   - Python3
   - jinja2
   - bootstrap  
+
+Example cron:
+  - /usr/local/bin/pipenv run generate.py  
 
 Current look:
 
