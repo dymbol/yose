@@ -5,6 +5,7 @@ meta_restart_page_s=60
 zabbix_srv="mon0.local.gda"
 zabbix_monitored_host="tool0.local.gda"
 generate_prometheus_metrics=True
+generate_zabbix_metrics=False
 
 Websites=[
 
